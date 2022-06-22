@@ -7,28 +7,54 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('username', models.CharField(max_length=100, unique=True, verbose_name='유저 아이디')),
-                ('password', models.CharField(max_length=128, verbose_name='비밀번호')),
-                ('fullname', models.CharField(max_length=100, verbose_name='사용자 이름')),
-                ('phone_number', models.CharField(max_length=30, verbose_name='전화번호')),
-                ('email', models.EmailField(max_length=128, verbose_name='이메일')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='가입 시각')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='수정 시각')),
-                ('is_active', models.BooleanField(default=True, verbose_name='활성화 여부')),
-                ('is_admin', models.BooleanField(default=False, verbose_name='관리자 여부')),
-                ('is_seller', models.BooleanField(default=False, verbose_name='판매자 여부')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        max_length=100, unique=True, verbose_name="유저 아이디"
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="비밀번호")),
+                ("fullname", models.CharField(max_length=100, verbose_name="사용자 이름")),
+                ("phone_number", models.CharField(max_length=30, verbose_name="전화번호")),
+                ("email", models.EmailField(max_length=128, verbose_name="이메일")),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="가입 시각"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="수정 시각"),
+                ),
+                ("is_active", models.BooleanField(default=True, verbose_name="활성화 여부")),
+                ("is_admin", models.BooleanField(default=False, verbose_name="관리자 여부")),
+                (
+                    "is_seller",
+                    models.BooleanField(default=False, verbose_name="판매자 여부"),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

@@ -1,23 +1,20 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db import models
 
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
-            raise ValueError('Users must have an username')
+            raise ValueError("Users must have an username")
         user = self.model(
             username=username,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, username, password):
-        user = self.create_user(
-            username=username,
-            password=password
-        )
+        user = self.create_user(username=username, password=password)
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -34,22 +31,21 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(verbose_name="활성화 여부", default=True)
     is_admin = models.BooleanField(verbose_name="관리자 여부", default=False)
     is_seller = models.BooleanField(verbose_name="판매자 여부", default=False)
-    
+
     @property
     def is_staff(self):
         return self.is_admin
-    
-    USERNAME_FIELD = 'username'
+
+    USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
-    
+
     objects = UserManager()
-    
+
     def __str__(self):
         return self.username
-    
+
     def has_perm(self, perm, obj=None):
         return True
 
-    def has_module_perms(self, app_label): 
+    def has_module_perms(self, app_label):
         return True
-
