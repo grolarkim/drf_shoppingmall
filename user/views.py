@@ -35,10 +35,18 @@ class UserAPIView(APIView):
     permission_classes = [PostOrLoginRequired]
     
     def get(self, request):
-        return
+        try:
+            data = UserSerializer(User.objects.get(id=request.user.id)).data
+            return Response(data=data, status=status.HTTP_200_OK)
+        except:
+            return Response({"error":"유저 정보가 잘못되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
-        return
+        user_serializer = UserSerializer(data=request.data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request):
         return
