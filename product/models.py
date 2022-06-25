@@ -32,3 +32,15 @@ class Product(models.Model):
     def __str__(self):
         return self.title
     
+
+class ProductOption(models.Model):
+    created_at = models.DateTimeField(verbose_name="생성 시각", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="수정 시각", auto_now=True)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    name = models.CharField(verbose_name="옵션 이름", max_length=100)
+    description = models.TextField(verbose_name="옵션 설명", null=True, blank=True)
+    price = models.IntegerField(verbose_name="가격")
+    
+    def __str__(self):
+        return  f"{self.product.name}의, {self.name} 옵션"
+    
